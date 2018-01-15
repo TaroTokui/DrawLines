@@ -18,7 +18,7 @@ public class SingleLine : MonoBehaviour {
         var filter = GetComponent<MeshFilter>();
         filter.sharedMesh = mesh;
 
-        filter.mesh.SetIndices(MakeIndices(), MeshTopology.Points, 0);
+        filter.mesh.SetIndices(MakeIndices(), MeshTopology.Lines, 0);
     }
 
     int[] MakeIndices()
