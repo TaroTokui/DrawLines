@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mesh2Line : MonoBehaviour {
+public class Mesh2Point : MonoBehaviour {
 
     private MeshFilter meshFilter;
     private Vector3[] vertices;
@@ -23,7 +23,7 @@ public class Mesh2Line : MonoBehaviour {
         Debug.Log(topo); // Triangles と出力される
 
         triangles = meshFilter.mesh.triangles;
-        meshFilter.mesh.SetIndices(MakeIndices(), MeshTopology.Lines, 0);
+        meshFilter.mesh.SetIndices(MakeIndices(), MeshTopology.Points, 0);
 
         // 再度MeshTopologyの確認
         topo = meshFilter.mesh.GetTopology(0);
@@ -37,16 +37,11 @@ public class Mesh2Line : MonoBehaviour {
 
     int[] MakeIndices()
     {
-        int[] indices = new int[2 * triangles.Length];
+        int[] indices = new int[triangles.Length];
         int i = 0;
-        for (int t = 0; t < triangles.Length; t += 3)
+        for (int t = 0; t < triangles.Length; t++)
         {
-            indices[i++] = triangles[t];        //start
-            indices[i++] = triangles[t + 1];    //end
-            indices[i++] = triangles[t + 1];    //start
-            indices[i++] = triangles[t + 2];    //end
-            indices[i++] = triangles[t + 2];    //start
-            indices[i++] = triangles[t];        //end
+            indices[i++] = triangles[t];
         }
         return indices;
     }
